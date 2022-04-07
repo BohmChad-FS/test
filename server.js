@@ -5,7 +5,47 @@ const app = express();
 
 app.get("/", (req, res, next) => {
     res.json({
-        message: "Did you GET it??"
+        message: "Using GET /",
+        metadata: {
+            host: req.hostname,
+            port: req.socket.localPort,
+            method: req.method
+        }
+    });
+});
+
+// post, patch, delete
+
+app.post("/", (req, res, next) => {
+    res.json({
+        message: "Using POST /",
+        metadata: {
+            host: req.hostname,
+            port: req.socket.localPort,
+            method: req.method
+        }
+    });
+});
+
+app.patch("/", (req, res, next) => {
+    res.json({
+        message: "Using PATCH /",
+        metadata: {
+            host: req.hostname,
+            port: req.socket.localPort,
+            method: req.method
+        }
+    });
+});
+
+app.delete("/", (req, res, next) => {
+    res.json({
+        message: "Using DELETE /",
+        metadata: {
+            host: req.hostname,
+            port: req.socket.localPort,
+            method: req.method
+        }
     });
 });
 

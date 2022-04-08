@@ -1,14 +1,18 @@
+const { urlencoded } = require("express");
 const express = require("express");
 const req = require("express/lib/request");
+const { process_params } = require("express/lib/router");
 require("dotenv").config();
 const app = express();
 
-app.get("/", (req, res, next) => {
+app.get("/:id", (req, res, next) => {
+    const userId = req.params.id
     res.json({
         message: "Using GET /",
         metadata: {
             host: req.hostname,
-            port: req.socket.localPort,
+            port:  process.env.port,
+            id: userId,
             method: req.method
         }
     });
@@ -16,34 +20,40 @@ app.get("/", (req, res, next) => {
 
 // post, patch, delete
 
-app.post("/", (req, res, next) => {
+app.post("/:id", (req, res, next) => {
+    const userId = req.params.id
     res.json({
         message: "Using POST /",
         metadata: {
             host: req.hostname,
-            port: req.socket.localPort,
+            port: process.env.port,
+            id: userId,
             method: req.method
         }
     });
 });
 
-app.patch("/", (req, res, next) => {
+app.patch("/:id", (req, res, next) => {
+    const userId = req.params.id
     res.json({
         message: "Using PATCH /",
         metadata: {
             host: req.hostname,
-            port: req.socket.localPort,
+            port:  process.env.port,
+            id: userId,
             method: req.method
         }
     });
 });
 
-app.delete("/", (req, res, next) => {
+app.delete("/:id", (req, res, next) => {
+    const userId = req.params.id
     res.json({
         message: "Using DELETE /",
         metadata: {
             host: req.hostname,
-            port: req.socket.localPort,
+            port: process.env.port,
+            id: userId,
             method: req.method
         }
     });

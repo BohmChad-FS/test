@@ -5,6 +5,19 @@ const { process_params } = require("express/lib/router");
 require("dotenv").config();
 const app = express();
 
+app.get("/", (req, res, next) => {
+    res.json({
+        message: "Using GET /",
+        metadata: {
+            host: req.hostname,
+            port:  process.env.port,
+            method: req.method
+        }
+    });
+});
+
+// post, patch, delete
+
 app.get("/:id", (req, res, next) => {
     const userId = req.params.id
     res.json({
@@ -18,16 +31,12 @@ app.get("/:id", (req, res, next) => {
     });
 });
 
-// post, patch, delete
-
-app.post("/:id", (req, res, next) => {
-    const userId = req.params.id
+app.post("/", (req, res, next) => {
     res.json({
         message: "Using POST /",
         metadata: {
             host: req.hostname,
             port: process.env.port,
-            id: userId,
             method: req.method
         }
     });
